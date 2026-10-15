@@ -1,0 +1,83 @@
+https://sqliteonline.com/ - Site para SQL online
+
+1. Select 
+	SELECT * FROM tabelapedidos
+	SELECT * from tabelafornecedores wHERE pa_s_de_origem = 'China';
+	SELECT DISTINCT cliente FROM tabelapedidos;
+2. Create
+	CREATE TABLE tabelaclientes (
+  	ID_Cliente INT PRIMARY KEY, 
+  	Nome_Cliente VARCHAR (250), 
+  	Informacoes_de_contato VARCHAR(250)
+  	);
+3. Alter
+	ALTER TABLE tabelaclientes DROP COLUMN endereco_Cliente; 
+4. Drop 
+	drop TABLE tabelaclientes - apaga uma rela 
+	drop SCHEMA text.bd - apaga um esquema 
+	drop DATABASE - deleta um banco de dados completo
+	drop COLUMN - Deleta uma coluna
+5. Chaves 
+	PRIMARY KEY - Elemento identificador da Tabela 
+	FOREIGN KEY - Elemento que faz a relação entre tabelas -  			FOREIGN KEY (fornecedor) REFERENCES tabelafornecedores (id)
+6. Insert 
+	INSERT INTO tabelaclientes 
+ 	(id_cliente, 
+  	nome_cliente, 
+  	informacoes_de_contato,
+  	endereco_cliente)
+  	VALUES
+  	('1', 'Ana Silva', 'ana.silva@email.com', 'Rua flores - Casa 1');
+	Mais de 1 valores 
+	  	VALUES 
+  		('2', 'João Santos', 'joaosantos@procedor.com', 'Rua das 					palmeiras, 25'),
+  		('3', 'Maria Fernandes', 'mariafermandes17@email.com', 			'Rua 			das aracaúrias, 254'),
+  		('4', 'Carlos Pereira', 'pereira_carloss@email.com', 'Rua 		ipê 			rosa, 45'),
+  		('5', 'Felipe Aguiar', 'Feli_Agi@email.com', 'Rua das rosas, 150');
+	Populando uma tabelas com dados de outra: 
+		insert into tabelapedidosgold
+		(id_pedido_gold, 
+ 		data_do_pedido_gold, 
+ 		status_gold, total_do_pedido_gold,
+ 		cliente_gold,
+ 		data_de_envio_estimada_gold)
+ 		SELECT
+ 		id, data_do_pedido, status, 
+ 		total_do_pedido, cliente, 
+ 		data_de_envio_es
+ 		From tabelapedidos
+ 		where total_do_pedido >= 400;
+ 7. Filtros com operadores lógicos - usados no comando WHERE
+	1. > maior que 
+	2. < menor que 
+	3. >= maior ou igual que 
+		select * from tabelaclientes where nome_cliente > 'C'
+		select * from tabelapedidos where data_do_pedido > '2023-09-19';
+	4. < menor ou igual que 
+	5. = igual que 
+		select * from tabelapedidos where total_do_pedido = 200;
+	6. <> Diferente que 
+	7. AND - junta duas condições p/ mostrar 1 respota; 
+		select * from tabelaprodutos WHERE preco_de_compra >= 500 AND preco_de_compra < 1000;
+	8. OR  - mostras duas condições 
+		select * from tabelapedidos where status = 'Pendente' OR status = 'Processando';
+	9. NOT - Nega uma condição e não a exibe
+		select * from tabelapedidos where NOT  status = 'Pendente'
+	10. BETWEEN - data entre um intervalo
+		select * from tabelapedidos where data_de_envio_es BETWEEN '2023-08-01' AND '2023-09-01'; 
+		SELECT * FROM tabelaprodutos WHERE preco_de_compra 
+		BETWEEN 200 AND 600 ORDER BY nome_do_produtos;
+	11. ORDEM BY - Ordenação por uma coluna
+		DESC - do maior para o menor
+8. Apelido (Alias) temporário
+	select informacoes_de_contato AS Email_cliente from tabelaclientes;
+9. Update - Atualização de dados da tabela
+	UPDATE tabelapedidos set status = 'Enviado' where status = 'Processando'; 
+	UPDATE tabelaclientes set informacoes_de_contato = 'j.santos@email.com', 
+	endereco_cliente = 'Rua dos paralelepipedos'
+	where id_cliente = 2; 
+10* Delete - Deleta os dados de uma tabela
+	DELETE from tabelafornecedores
+	WHERE pa_s_de_origem = 'Turquia'; 
+	 ON DELETE CASCADE - deleta a tabela mãe e suas dependentes; 
+
