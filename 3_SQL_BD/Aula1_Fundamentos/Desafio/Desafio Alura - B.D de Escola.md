@@ -118,24 +118,14 @@ SELECT \* from TabelaTurma\_Disciplina
 
 ### 1.6. Tabela Turma\_Alunos
 
-
-
-create table TabelaTurma\_Alunos 
-
-( id\_turma INT, id\_aluno INT,
-
-&#x20; 
-
-FOREIGN key (id\_turma) REFERENCES tabelaAlunos (id\_turma),
-
-FOREIGN key (id\_aluno) REFERENCES tabelaAlunos (id\_aluno)
-
+create table TabelaTurma_Alunos 
+( id_turma INT, id_aluno INT,
+  
+FOREIGN key (id_turma) REFERENCES tabelaTurmas (id_turma),
+FOREIGN key (id_aluno) REFERENCES tabelaAlunos (id_aluno)
 );   
 
-
-
-SELECT \* from TabelaTurma\_Alunos
-
+SELECT * from TabelaTurma_Alunos
 
 
 ### 1.7. Tabelas Notas
